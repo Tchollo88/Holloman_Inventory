@@ -19,6 +19,6 @@ namespace Holloman_Inventory
 
         public decimal ShippingCost { get { return _shipping; } }
 
-       string IShippable.ProductName { get { return _product; } }
+        public string ProductName { get { return _product; } }
     }
 }

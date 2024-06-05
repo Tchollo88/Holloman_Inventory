@@ -10,7 +10,13 @@ namespace Holloman_Inventory
     {
 		private int _count;
 
-		public int Amount { get; set; }
+		public int Declare()
+		{
+			return _count;
+		}
+
+		public int Increse() { return _count++; }
+		public int Build { get; set; }
 
 	}
 }
