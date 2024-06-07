@@ -4,21 +4,29 @@ namespace Holloman_Inventory
 {
     public class Program
     {
+        #region ** Instant Data **
+        
         IShippable item;
-
+        
+        #endregion
 
         static void Main(string[] args)
         {
-            int qty = 0;
+            #region **Temp Data**
+            // temp variables for use in catch value for the count needed for each product
             int c1 = 0;
             int c2 = 0;
             int c3 = 0;
             int c4 = 0;
             int c5 = 0;
+            #endregion
 
-        IShippable item = new Bicycle("Bicycle", 9.50m);
-            Shipper cart = new Shipper(item);        
-            
+            #region ** Instantiated Objects **
+            //Objects built for passing into the code
+            IShippable item = new Bicycle("Bicycle", 9.50m);
+            Shipper cart = new Shipper(item);
+            #endregion
+
             Menu(c1, c2, c3, c4, c5, cart);
         }
 
@@ -27,8 +35,10 @@ namespace Holloman_Inventory
             decimal cost = 0;
             bool check;
 
+            //Quantity check the total amount of items in the cart here
             check = cart.QuantityCheck();
-            
+
+            #region ** User Menu **            
             Console.Clear();
             Console.WriteLine("Welcome to SurplusPlus, we have a multitude of items in stock please select one of the following: ");
             Console.WriteLine("Press the number corresponding with the item in question. Keep in mind you can only have 10 items at a time.");
@@ -40,9 +50,12 @@ namespace Holloman_Inventory
             Console.WriteLine("(6) List Shopping Cart");
             Console.WriteLine("(7) Make Purchase");
             ConsoleKeyInfo Key = Console.ReadKey();
+            #endregion
 
-            if(check == true)
-            {
+            #region ** Menu Interaction Logic **
+            // I check to see if the total item count is with in the thresh hold here
+            if (check == true)
+            {   // Checking to see if the right keys were not pressed
                 if (
                 Key.Key != ConsoleKey.D1 &&
                 Key.Key != ConsoleKey.D2 &&
@@ -58,14 +71,13 @@ namespace Holloman_Inventory
                     Console.ReadLine();
                     Menu(c1, c2, c3, c4, c5, cart);
                 }
-                else if (
-                    Key.Key == ConsoleKey.D1
-                    )
+                else if (Key.Key == ConsoleKey.D1) 
                 {
                     IShippable item = new Bicycle("Bicycle", 9.50m);
                     cart.Add(item);
 
                     c1 = cart.Count(item);
+                    cart.AccumulateStackTotal(item);
                     cost = cart.Mathmatic(item);
                     cart.Disect(item);
 
@@ -79,6 +91,7 @@ namespace Holloman_Inventory
                     cart.Add(item);
 
                     c2 = cart.Count(item);
+                    cart.AccumulateStackTotal(item);
                     cost = cart.Mathmatic(item);
                     cart.Disect(item);
 
@@ -89,8 +102,9 @@ namespace Holloman_Inventory
                 {
                     IShippable item = new BaseballGlove("Baseball Glove", 3.23m);
                     cart.Add(item);
-
+                    
                     c3 = cart.Count(item);
+                    cart.AccumulateStackTotal(item);
                     cost = cart.Mathmatic(item);
                     cart.Disect(item);
 
@@ -103,6 +117,7 @@ namespace Holloman_Inventory
                     cart.Add(item);
 
                     c4 = cart.Count(item);
+                    cart.AccumulateStackTotal(item);
                     cost = cart.Mathmatic(item);
 
                     SubMessage(item);
@@ -114,13 +129,14 @@ namespace Holloman_Inventory
                     cart.Add(item);
 
                     c5 = cart.Count(item);
+                    cart.AccumulateStackTotal(item);
                     cost = cart.Mathmatic(item);
                     cart.Disect(item);
 
                     SubMessage(item);
                     Menu(c1, c2, c3, c4, c5, cart);
                 }
-                else if (Key.Key == ConsoleKey.D6)
+                else if (Key.Key == ConsoleKey.D6) // I build the reciept here
                 {                                  
                     IShippable item = new Bicycle("", 0m);
                     string manifesto = "";
@@ -149,9 +165,10 @@ namespace Holloman_Inventory
                 }
             }
             else { Menu(c1, c2, c3, c4, c5, cart); }
-            
+            #endregion
         }
         
+        // I inform the user of their current product being to the shopping cart
         public static void SubMessage(IShippable item)
         {
             Console.Clear();
