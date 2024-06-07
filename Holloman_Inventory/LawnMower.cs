@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Holloman_Inventory
 {
-    public class Product : IShippable
+    public class LawnMower : IShippable
     {
         private decimal _shipping;
         private string _product;
 
-        public Product(string Name, decimal Shipping)
+        public LawnMower(string Name, decimal Shipping)
         {
             _product = Name;
             _shipping = Shipping;
@@ -19,6 +19,9 @@ namespace Holloman_Inventory
 
         public decimal ShippingCost { get { return _shipping; } }
 
-        public string ProductName { get { return _product; } }
+        public string ProductName
+        {
+            get { return _product; }
+        }
     }
 }

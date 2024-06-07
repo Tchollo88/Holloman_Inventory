@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Holloman_Inventory
 {
-    internal interface IShippable
+    public interface IShippable
     {
         decimal ShippingCost { get; }
 
